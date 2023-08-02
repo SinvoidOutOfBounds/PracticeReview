@@ -6,7 +6,7 @@ begin
 	declare @RowCount int = (select count(*) from syn.SA_CustomerSeasonal)
 	declare @ErrorMessage varchar(max)
 
--- Проверка на корректность  загрузки
+-- Проверка на корректность загрузки
 	if not exists (
 	select 1
 	from syn.ImportFile as f
@@ -57,7 +57,7 @@ begin
 			when cst.ID is null then 'Тип клиента в справочнике "Тип клиента"'
 			when try_cast(cs.DateBegin as date) is null then 'Невозможно определить Дату начала'
 			when try_cast(cs.DateEnd as date) is null then 'Невозможно определить Дату начала'
-			when try_cast(isnull(cs.FlagActive, 0) as bit) is null then 'Невозможно определить Активность'
+			when try_cast(isnull(cs.FlagActive, 0) as bit) is null then 'Невозможно определить активность'
 		end as Reason
 	into #BadInsertedRows
 	from syn.SA_CustomerSeasonal as cs
